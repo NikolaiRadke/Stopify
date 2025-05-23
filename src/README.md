@@ -14,7 +14,4 @@ First of all, your IDE need ESP32 support:
 7. Press ``` Install ```.
 
 ### Preparing the sketch
-You need the client ID, the client secret and the refresh token. 
-  
-  
-...under development.
+You need the client ID, the client secret and the refresh token. There is a tool for Linux and Windows that helps getting this token. Look here: [https://github.com/NikolaiRadke/Stopify/tree/main/token_tool](token_tool)
