@@ -3,7 +3,7 @@
 
 # What the... is he sawing again?
 
-You're on your own and have just put on an audiobook, when the noise starts. Stopify pauses playback until the noise stops. Easy to build, easy to configure. Save your nerves and build stopify today!  
+You're on your own and have just put on an audiobook, when the noise starts. That was clear. Stopify pauses playback until the noise stops. Easy to build, easy to configure. Save your nerves and build stopify today!  
 
 *Oje, Englisch? Kann ich nicht. Schnell [hier hin](https://github.com/NikolaiRadke/Stopify/wiki)*.  
 
