@@ -9,4 +9,4 @@ Stopify must be connected to your Spotify account to run. This must be done by c
 5. Write a short description. Unused, but mandatory. Maybe *Noise controller app for ESP32*.
 6. In field ``` Redirect URL ``` enter **http://localhost:8080/callback**
 7. Click on ``` Save ```. Your app is configured.
-8. Now ***Client ID** is displayed. Click on ``` View client secret  ``` to display the secret too.
+8. Now ***client ID** is displayed. Click on ``` View client secret  ``` to display thes **client secret** too.
