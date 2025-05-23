@@ -19,7 +19,7 @@
 #include <WiFiClientSecure.h>                    // Providing HTTPS
 #include <base64.h>                              // Basic Auth-header decoding
 
-#define ADC_PIN 34                               // Max9814 microfone
+#define ADC_PIN 34                               // Max9814 microphone
 #define REWIND 3000                              // Rewind 3 seconds after pause
 
 // --- FFT Configuration ---
@@ -37,8 +37,8 @@ double         vReal[SAMPLES];                   // Array for real parts of FFT 
 double         vImag[SAMPLES];                   // Array for imaginary parts (set to 0)
 
 // --- WiFi credentials ---
-const char*    ssid     = "Eintracht";           // WiFi SSID
-const char*    password = "26122010Merz";        // WiFi password
+const char*    ssid     = "";                    // WiFi SSID
+const char*    password = "";                    // WiFi password
 
 // --- Spotify OAuth credentials ---
 char clientId[]     = "";                        // Your Spotify client ID
