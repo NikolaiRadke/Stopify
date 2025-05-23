@@ -15,3 +15,6 @@ First of all, your IDE need ESP32 support:
 
 ### Preparing the sketch
 You need the client ID, the client secret and the refresh token. 
+  
+  
+...under development.
