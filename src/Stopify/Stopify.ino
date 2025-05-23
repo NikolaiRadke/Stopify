@@ -3,7 +3,7 @@
     https://www.monstermaker.de
 
     Sketch for audio analysis gadget. Pauses Spotify if noise detected.
-    For standard ESP32 Dev Kit with dual core and Max9814 microfone.
+    For standard ESP32 Dev Kit with dual core and Max9814 microphone.
 
     Wiring:
     Max9814       ESP32
@@ -19,20 +19,20 @@
 #include <WiFiClientSecure.h>                    // Providing HTTPS
 #include <base64.h>                              // Basic Auth-header decoding
 
-#define ADC_PIN 34                               // Max9814 microphone
-#define REWIND 3000                              // Rewind 3 seconds after pause
+#define ADC_PIN       34                         // Max9814 microphone
+#define REWIND        3000                       // Rewind 3 seconds after pause
 
 // --- FFT Configuration ---
-#define SAMPLES 256                              // Number of samples per FFT
-#define SAMPLING_FREQUENCY 8000                  // Sampling rate in Hz
-#define THRESHOLD 5000.0                         // Amplitude threshold for noise detection
-#define LOW_FREQ  3000.0                         // Low end of detection band
-#define HIGH_FREQ 4000.0                         // High end of detection band
+#define SAMPLES       256                        // Number of samples per FFT
+#define SAMPLING_FREQ 8000                       // Sampling rate in Hz
+#define THRESHOLD     5000                       // Amplitude threshold for noise detection
+#define LOW_FREQ      3000                       // Low end of detection band
+#define HIGH_FREQ     4000                       // High end of detection band
 
-const uint8_t  binResolution = SAMPLING_FREQUENCY / SAMPLES; // Hz per FFT bin
+const uint8_t  binResolution = SAMPLING_FREQ / SAMPLES; // Hz per FFT bin
 const uint16_t indexLow  = LOW_FREQ / binResolution; // Low bin index
 const uint16_t indexHigh = HIGH_FREQ / binResolution; // High bin index
-const uint32_t sampling_period_us = round(1000000.0 / SAMPLING_FREQUENCY); // Time between samples in microseconds
+const uint32_t sampling_period_us = round(1000000 / SAMPLING_FREQ); // Time between samples in microseconds
 double         vReal[SAMPLES];                   // Array for real parts of FFT input
 double         vImag[SAMPLES];                   // Array for imaginary parts (set to 0)
 
