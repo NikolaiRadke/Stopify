@@ -41,10 +41,9 @@ const char*    ssid     = "Eintracht";           // WiFi SSID
 const char*    password = "26122010Merz";        // WiFi password
 
 // --- Spotify OAuth credentials ---
-char clientId[]     = "5426e58e20e14db0bb9518a0eb68409e"; // Spotify client ID
-char clientSecret[] = "7ee7d0394d7148bfbde3324488e2a676"; // Spotify client secret
-// Insert refresh token here:
-char refreshToken[] = "AQA02nbI6JGjY8xgiUrC1HZGBzz2ICLqv2CeCD25X3AtX9WN3Tyyiw3OQf_XfYfLLojqZCus4N1ZS1Z9a2AQ-2_9r9wiAq3-hnC-sLu88wZzbndyMQ0FQI8YcFa9lh7PCwQ"; 
+char clientId[]     = "";                        // Your Spotify client ID
+char clientSecret[] = "";                        // Your Spotify client secret
+char refreshToken[] = "";                        // Your refresh token from the stopify token tool 
 
 String         accessToken;                      // Active OAuth token
 uint32_t       lastTokenRefresh = 0;             // Timestamp of last token refresh
