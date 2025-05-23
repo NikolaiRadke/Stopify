@@ -41,9 +41,9 @@ const char*    ssid     = "";                    // WiFi SSID
 const char*    password = "";                    // WiFi password
 
 // --- Spotify OAuth credentials ---
-char clientId[]     = "";                        // Your Spotify client ID
-char clientSecret[] = "";                        // Your Spotify client secret
-char refreshToken[] = "";                        // Your refresh token from the stopify token tool 
+char           clientId[]     = "";              // Your Spotify client ID
+char           clientSecret[] = "";              // Your Spotify client secret
+char           refreshToken[] = "";              // Your refresh token from the stopify token tool 
 
 String         accessToken;                      // Active OAuth token
 uint32_t       lastTokenRefresh = 0;             // Timestamp of last token refresh
