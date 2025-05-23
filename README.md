@@ -10,6 +10,8 @@ You're on your own and have just put on an audiobook, when the noise starts. Tha
 What's new?  
 * **23.05.2025** First commit. Hello world.    
     -- More news? See the [newsblog](https://github.com/NikolaiRadke/Stopify/tree/main/NEWS.md).
+
+...under development.  
     
 
 
