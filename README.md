@@ -1,7 +1,7 @@
 ![Stopify](http://www.nikolairadke.de/stopify/stopify_back.jpg)
 
 
-# What the... is he sawing again?
+# What the... are they sawing again?
 
 You're on your own and have just put on an audiobook, when the noise starts. That was clear. Stopify pauses playback until the noise stops. Easy to build, easy to configure. Save your nerves and build stopify today!  
 
