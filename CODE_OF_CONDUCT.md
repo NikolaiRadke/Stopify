@@ -1,4 +1,5 @@
 # Contributor Covenant Code of Conduct
+for Stopify.
 
 ## Our Pledge
 
