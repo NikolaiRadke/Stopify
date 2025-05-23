@@ -12,7 +12,7 @@ Stopify must be connected to your Spotify account to run. This must be done by c
 8. Now **client ID** is displayed. Click on ``` View client secret  ``` to display thes **client secret** too.
 9. For **Windows** start **spotify_token_tool.exe** in folder ``` token_tool/Windows ```.  
   For **Linux** start **spotify_token_tool** in folder ``` token_tool/Linux ```.
-10. Your Browser will open. Enter the Codes from the Dasboard in ``` Client-ID ``` and ``` Client-Secret```.
+10. Your Browser will open. Enter the Codes from the dasboard in ``` Client-ID ``` and ``` Client-Secret```.
 11. If you are not logged in anymore, log in now.
 12. Click on `` Agree ```. Your **refreh token** is displayed.
 13. Insert **client ID**, **client secret** and the **refresh token** into your sketch.
