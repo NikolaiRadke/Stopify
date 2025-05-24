@@ -1,3 +1,5 @@
+# The tool was written in Python using ChatGPT because the creator doesn't know Python.
+
 import threading
 import webbrowser
 from flask import Flask, request, render_template_string, redirect
@@ -9,7 +11,7 @@ app = Flask(__name__)
 CLIENT_ID = ''
 CLIENT_SECRET = ''
 REDIRECT_URI = 'http://localhost:8080/callback'
-SCOPES = 'user-read-private user-read-email'  # Beispielscopes, kannst du anpassen
+SCOPES = 'user-read-private user-read-email'
 
 HTML_TEMPLATE = '''
 <!DOCTYPE html>
