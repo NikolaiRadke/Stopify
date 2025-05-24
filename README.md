@@ -22,6 +22,7 @@ Except for the tools and some time, you need:
 * Optional an audio analyis app, like Spectroid (Android) or SpectrumView (IOS)
 * ESP32 Board with dual core, like the standard ESP32 Dev Kit
 * MAX9814 microphone
+* A power source for the ESP32
 
 ### Content
   
