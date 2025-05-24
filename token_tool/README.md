@@ -18,3 +18,6 @@ Stopify must be connected to your Spotify account to run. This must be done by c
 13. Insert **client ID**, **client secret** and the **refresh token** into your sketch.
 
 Now you can upload your code and Stopify is connected to your Spotify account.
+  
+The tool was written in Python using ChatGPT because the creator doesn't know Python.
+
