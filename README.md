@@ -5,7 +5,7 @@ You're on your own and have just put on an audiobook, when the noise starts. Tha
 
 *Oje, Englisch? Kann ich nicht. Schnell [hier hin](https://github.com/NikolaiRadke/Stopify/wiki)*.  
 
-![Stopify](http://www.nikolairadke.de/stopify/stopify.jpg)
+![Stopify](http://www.nikolairadke.de/stopify/stopify_2.jpg)
   
 Stopify is an audio analysis tool that connects to your Wifi and Spotify account. While a track is playing, it analyzes the ambient noise and pauses Spotify at certain frequencies, 
 such as those produced by a drill and and resumes playback as soon as the disturbance is over.
