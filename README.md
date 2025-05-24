@@ -19,7 +19,7 @@ What's new?
 Except for the tools and some time, you need:
 * Arduino IDE 1.6.6 or higher
 * ESP32 core support and the base64 library
-* Optional an audio analyis app, like Spectroid (Android) or SpectrumView (IOS)
+* Optional an audio analysis app, like Spectroid (Android) or SpectrumView (IOS)
 * ESP32 Board with dual core, like the standard ESP32 Dev Kit
 * MAX9814 microphone
 * A power source for the ESP32
