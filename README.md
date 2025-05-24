@@ -1,4 +1,4 @@
-![Stopify](http://www.nikolairadke.de/stopify/stopify_back.jpg)
+![Stopify](http://www.nikolairadke.de/stopify/stopify_back_2.jpg)
 
 
 # What the... are they sawing again?
