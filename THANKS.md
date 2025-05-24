@@ -2,8 +2,8 @@
 
 These people helped me with Stopify:  
   
-- **Marcus Hansson** - Testing the tool and idea finding support.  
-- **Elise Lindner** - Making noises for testing.
+- **Marcus Hansson** - testing the tool and idea finding support.  
+- **Elise Lindner** - taking noises for testing.
 
 Used ressources:  
   
