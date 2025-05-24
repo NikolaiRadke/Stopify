@@ -21,7 +21,7 @@ Except for the tools and some time, you need:
 * ESP32 core support and some libraries
 * Optional an audio analyis app, like Specdroid
 * ESP32 Board with dual core, like the standard ESP32 Dev Kit
-* Max9814 microphone
+* MAX9814 microphone
 
 ### Content
   
