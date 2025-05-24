@@ -12,6 +12,8 @@ First of all, your IDE need ESP32 support:
 5. Open ``` Tools > Board > Boards Manager ```.  
 6. Select ``` esp32 by Espressif Systems ```.  
 7. Press ``` Install ```.
+8. Open ``` Tools > Manage Libraries ```.
+9. In the librariy manager search for **base64** and press ``` Install ```.
 
 ### Preparing the sketch
 You need the client ID, the client secret and the refresh token. There is a tool for Linux and Windows that helps getting this token. Look here: [token_tool](https://github.com/NikolaiRadke/Stopify/tree/main/token_tool)  
