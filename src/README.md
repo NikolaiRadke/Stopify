@@ -14,6 +14,7 @@ First of all, your IDE need ESP32 support:
 7. Press ``` Install ```.
 8. Open ``` Tools > Manage Libraries ```.
 9. In the library manager search for **base64** and press ``` Install ```.
+10. Again in the library manager search for **arduinoFFT** and press ``` Install ```.
 
 ### Preparing the sketch
 You need the client ID, the client secret and the refresh token. There is a tool for Linux and Windows that helps getting this token. Look here: [token_tool](https://github.com/NikolaiRadke/Stopify/tree/main/token_tool)  
@@ -25,7 +26,7 @@ You need the client ID, the client secret and the refresh token. There is a tool
 5. Enter your Wifi password in Line 42 in ``` password = ""; ```.
 
 ### Configuring the sketch
-You can edit the detection band in line 29 in **LOW_FREQ** and line 30 in **HIGH_FREQ**, If you need to analyse a higher frequence, you must change **SAMPLING_FREQ**. It must be at least twice as high as **HIGH_FREQ**. You can adjust the sensivity with **THRESHOLD** in line 27.  
+You can edit the detection band in line 29 in **LOW_FREQ** and line 30 in **HIGH_FREQ**, If you need to analyse a higher frequence, you must change **SAMPLING_FREQ**. It must be at least twice as high as **HIGH_FREQ** and . You can adjust the sensivity with **THRESHOLD** in line 27.  
 
 ### Uploading the sketch
 1. Select ``` Board > esp32 > ESP32 Dev Module ``` or whatever kind of board you are using.
