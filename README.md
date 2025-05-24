@@ -13,7 +13,7 @@ Stopify is an audio analysis tool that connects to your Wifi and Spotify account
 such as those produced by a drill and and resumes playback as soon as the disturbance is over.
 
 What's new?  
-* **23.05.2025** First commit. Hello world.    
+* **24.05.2025** Finished the repository.        
     -- More news? See the [newsblog](https://github.com/NikolaiRadke/Stopify/tree/main/NEWS.md).
      
 ### Prerequisites
