@@ -36,7 +36,7 @@ Root directory with some explanation files.
 |   └── Stopify/
 |       The source code. Only one file.
 └── token_tool/
-    The python tool to get the refresh token.
+    The Python tool to get the refresh token.
     ├── Linux/
     |   Precompiled Linux tool. Only one file.
     └── Windows/
