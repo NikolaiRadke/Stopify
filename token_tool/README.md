@@ -7,7 +7,7 @@ To work properly, Stopify needs access to your Spotify account. This is done by 
 3. Click on ``` Create app ```.
 4. Give your app a name, like *Stopify* or anything you like.
 5. Enter a short description. It's mandatory, even though it's unused. Example: *Noise controller app for ESP32*.
-6. In the ``` Redirect URL ``` field, enter **http://127.0.0.1:8888/callback)** and click ``` Add ```.
+6. In the ``` Redirect URL ``` field, enter **`http://127.0.0.1:8888/callback`** and click ``` Add ```.
 7. Agree to Spotify's Developer Terms of Service.  
 8. Click ``` Save ```. 
 
