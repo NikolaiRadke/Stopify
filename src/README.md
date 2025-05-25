@@ -29,7 +29,7 @@ You need the client ID, the client secret and the refresh token. There is a tool
 You can edit the detection band in line 29 in **LOW_FREQ** and line 30 in **HIGH_FREQ**, If you need to analyse a higher frequence, you must change **SAMPLING_FREQ**. It must be at least twice as high as **HIGH_FREQ** and . You can adjust the sensivity with **THRESHOLD** in line 27.  
 
 ### Uploading the sketch
-1. Select ``` Board > esp32 > ESP32 Dev Module ``` or whatever kind of board you are using.
+1. Select ``` Board > esp32 ``` **ESP32 Dev Module** or whatever kind of board you are using.
 2. Plug in your Board and select ``` Port ``` with your used USB port.
 3. Click on the upload button in the IDE.
 
