@@ -23,7 +23,7 @@ Except for the tools and some time, you need:
 * ESP32 Board with dual core, like the standard ESP32 Dev Kit
 * MAX9814 microphone
 * A power source for the ESP32
-* A 2,4 GHz Wifi
+* A 2.4 GHz Wifi
 
 ### Content
   
