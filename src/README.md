@@ -5,7 +5,7 @@ This description is intended for the Arduino IDE. However, those using a differe
 ### Preparing the IDE  
 First of all, your IDE need ESP32 support:
 
-1. Open ``` File > Preferences ```.  
+1. Open ``` File > Preferences... ```.  
 2. Find the field ``` Additional Boards Manager URLs ```.  
 3. Enter ``` https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json ```.  
 4. Press ``` OK ```.  
