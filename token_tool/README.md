@@ -10,7 +10,7 @@ Stopify must be connected to your Spotify account to run. This must be done by c
 6. In field ``` Redirect URL ``` enter **http://127.0.0.1:8080/callback)** and press ``` Add ```.
 7. Agree with Spotify's Developer Terms of Service.  
 8. Click on ``` Save ```. Your app is configured.
-9. Now **client ID** is displayed. Click on ``` View client secret  ``` to display thes **client secret** too.
+9. Now **client ID** is displayed. Click on ``` View client secret  ``` to display the **client secret** too. Leave the window open.  
 10. For **Windows** start **spotify_token_tool.exe** in folder ``` token_tool/Windows ```.  
   For **Linux** start **spotify_token_tool** in folder ``` token_tool/Linux ```.
 11. Your Browser will open. Enter the Codes from the dasboard in ``` Client-ID ``` and ``` Client-Secret```.
