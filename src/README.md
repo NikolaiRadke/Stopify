@@ -26,7 +26,7 @@ You need the client ID, the client secret and the refresh token. There is a tool
 5. Enter **your Wifi password** in Line 41 in ``` password = ""; ```.
 
 ### Configuring the sketch
-You can edit the detection band in line 29 in **LOW_FREQ** and line 30 in **HIGH_FREQ**, If you need to analyse a higher frequence, you must change **SAMPLING_FREQ**. It must be at least twice as high as **HIGH_FREQ** and . You can adjust the sensivity with **THRESHOLD** in line 27.  
+You can edit the detection band in line 29 in **LOW_FREQ** and line 30 in **HIGH_FREQ**, If you need to analyse a higher frequence, you must change **SAMPLING_FREQ** in line 27. It must be at least twice as high as **HIGH_FREQ** and . You can adjust the sensivity with **THRESHOLD** in line 28.  
 
 ### Uploading the sketch
 1. Select ``` Tools > Board > esp32 ``` **ESP32 Dev Module** or whatever kind of board you are using.
