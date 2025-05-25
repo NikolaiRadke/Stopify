@@ -1,4 +1,4 @@
-# Firmware für Stopify  
+# Firmware for Stopify  
   
 This description is intended for the Arduino IDE. However, those using a different environment should have no problems. 
 
