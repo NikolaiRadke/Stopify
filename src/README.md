@@ -33,6 +33,7 @@ You can edit the detection band in line 29 in **LOW_FREQ** and line 30 in **HIGH
 2. Plug in your Board and select ``` Tools > Port ``` with your used USB port.
 3. Click on the upload button in the IDE.
 
+### Check status
 You can open the serial monitor. If everthing is fine, the ESP32 will connect to Wifi and display its current IP. Now you can start Spotify, play a track, make some noise, maybe with a cordless screwdriver, and see what happens. the serial monitor will print debug informations.
 
 
