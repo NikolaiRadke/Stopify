@@ -1,6 +1,6 @@
 # How to get client id, client secret and the refresh token
 
-Stopify must be connected to your Spotify account to run. This must be done by creating a Spotify app on the *Spotify for Developers* page under [https://developer.spotify.com/](https://developer.spotify.com/).
+Stopify must be connected to your Spotify account to run. This must be done by creating a Spotify app on the *Spotify for Developers* page under [https://developer.spotify.com/](https://developer.spotify.com/). Don't worry, all of this must be done only once.
 
 1. Open the URL above and log in (upper right corner).
 2. Click on your name (upper right corner again) and select ``` Dashboard ```.
