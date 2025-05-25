@@ -23,7 +23,7 @@ You need the client ID, the client secret and the refresh token. There is a tool
 2. Insert the**client secret** from the dashboard into line 45 in ``` clientSecret[] = ""; ```.
 3. Insert the (long) **refresh token** from the token tool in line 46 in ``` refreshToken[] = ""; ```.
 4. Enter **your Wifi SSID** in Line 40 in ``` ssid = ""; ```.
-5. Enter **your Wifi password** in Line 42 in ``` password = ""; ```.
+5. Enter **your Wifi password** in Line 41 in ``` password = ""; ```.
 
 ### Configuring the sketch
 You can edit the detection band in line 29 in **LOW_FREQ** and line 30 in **HIGH_FREQ**, If you need to analyse a higher frequence, you must change **SAMPLING_FREQ**. It must be at least twice as high as **HIGH_FREQ** and . You can adjust the sensivity with **THRESHOLD** in line 27.  
