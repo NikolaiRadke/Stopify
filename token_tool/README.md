@@ -7,7 +7,7 @@ Stopify must be connected to your Spotify account to run. This must be done by c
 3. Click on ``` Create app ```.
 4. Give your app a name, like *Stopify* or whatever you like.
 5. Write a short description. Unused, but mandatory. Maybe *Noise controller app for ESP32*.
-6. In field ``` Redirect URL ``` enter **http://localhost:8080/callback**.
+6. In field ``` Redirect URL ``` enter **http&#58;&#47;&#47;localhost:8080/callback**.
 7. Click on ``` Save ```. Your app is configured.
 8. Now **client ID** is displayed. Click on ``` View client secret  ``` to display thes **client secret** too.
 9. For **Windows** start **spotify_token_tool.exe** in folder ``` token_tool/Windows ```.  
