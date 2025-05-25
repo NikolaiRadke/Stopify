@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 CLIENT_ID = ''
 CLIENT_SECRET = ''
-REDIRECT_URI = 'http://localhost:8080/callback'
+REDIRECT_URI = 'http://127.0.0.1:8888/callback'
 SCOPES = 'user-read-private user-read-email'
 
 HTML_TEMPLATE = '''
@@ -159,10 +159,10 @@ def callback():
 
 
 def start_flask():
-    app.run(port=8080)
+    app.run(port=8888)
 
 if __name__ == '__main__':
     threading.Thread(target=start_flask).start()
-    webbrowser.open("http://localhost:8080")
+    webbrowser.open("http://127.0.0.1:8888")
 
 
