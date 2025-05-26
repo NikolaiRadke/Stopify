@@ -12,8 +12,8 @@ To work properly, Stopify needs access to your Spotify account. This is done by 
 8. Click ``` Save ```. 
 
 Your app is now set up. Now get the Token.
-1. Your **Client ID** is now visible.
-2 Start the token tool:
+9. Your **Client ID** is now visible.
+10. Start the token tool:
   For **Windows** run  ``` spotify_token_tool.exe  ```  from``` token_tool/Windows ```.  
   For **Linux** run  ``` spotify_token_tool ```  from ``` token_tool/Linux ```.
 11. Your Browser will open. Enter the **Client ID** from the Spotify dashboard.
