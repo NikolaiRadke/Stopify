@@ -16,7 +16,7 @@ To get started, you’ll need to add ESP32 support to your Arduino IDE:
 8. Search for **arduinoFFT** and click ``` Install ```.
 
 ### Preparing the sketch
-You’ll need your Client ID, Client Secret, and the Refresh Token. There’s a tool available for Linux and Windows to help you get the token:  [token_tool](https://github.com/NikolaiRadke/Stopify/tree/main/token_tool). Now open the sketch file and make the following edits:  
+You’ll need your Client ID and the Refresh Token. There’s a tool available for Linux and Windows to help you get the token:  [token_tool](https://github.com/NikolaiRadke/Stopify/tree/main/token_tool). Now open the sketch file and make the following edits:  
 
 1. Line 41: enter your Wi-Fi **SSID** in ``` ssid = ""; ```.`
 2. Line 42: enter your Wi-Fi **password** in ``` password = ""; ```.
