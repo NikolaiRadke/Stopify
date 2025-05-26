@@ -11,15 +11,15 @@ To work properly, Stopify needs access to your Spotify account. This is done by 
 7. Agree to Spotify's Developer Terms of Service.  
 8. Click ``` Save ```. 
 
-Your app is now set up. Now get the Token.
-9. Your **Client ID** is now visible.
-10. Start the token tool:
-  For **Windows** run  ``` spotify_token_tool.exe  ```  from``` token_tool/Windows ```.  
-  For **Linux** run  ``` spotify_token_tool ```  from ``` token_tool/Linux ```.
-11. Your Browser will open. Enter the **Client ID** from the Spotify dashboard.
-12. If you are not logged to Spotify, log in now.
-13. Click ``` Agree ```.  to authorize the app. Your **refresh token** is now displayed.
-14. Copy the **Client ID** and **Refresh Token** into your Stopify sketch. That’s it — your ESP32 is now linked to Spotify.
+Your app is now set up. Now get the Token.  
+9. Your **Client ID** is now visible.  
+10. Start the token tool:  
+  For **Windows** run  ``` spotify_token_tool.exe  ```  from``` token_tool/Windows ```.    
+  For **Linux** run  ``` spotify_token_tool ```  from ``` token_tool/Linux ```.  
+11. Your Browser will open. Enter the **Client ID** from the Spotify dashboard.  
+12. If you are not logged to Spotify, log in now.  
+13. Click ``` Agree ```.  to authorize the app. Your **refresh token** is now displayed.  
+14. Copy the **Client ID** and **Refresh Token** into your Stopify sketch. That’s it — your ESP32 is now linked to Spotify.  
       
 *Fun fact:*
 The token tool was written in Python — using ChatGPT — because the creator didn’t know any Python.   
