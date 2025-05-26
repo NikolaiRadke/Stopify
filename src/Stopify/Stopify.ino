@@ -17,10 +17,12 @@
 #include <arduinoFFT.h>                          // FFT for audio analysis
 #include <WiFi.h>                                // Connecting to the internet
 #include <WiFiClientSecure.h>                    // Providing HTTPS
+#include <Preferences.h>                         // Store token in flash memory
 #include <base64.h>                              // Basic Auth-header decoding
 
-#define ADC_PIN       34                         // Max9814 microphone
+#define ADC_PIN       34                         // MAX9814 microphone
 #define REWIND        3000                       // Rewind 3 seconds after pause
+
 
 // --- FFT Configuration ---
 #define SAMPLES       256                        // Number of samples per FFT
@@ -29,49 +31,65 @@
 #define LOW_FREQ      3000                       // Low end of detection band
 #define HIGH_FREQ     4000                       // High end of detection band
 
-const uint8_t  binResolution = SAMPLING_FREQ / SAMPLES; // Hz per FFT bin
-const uint16_t indexLow  = LOW_FREQ / binResolution; // Low bin index
-const uint16_t indexHigh = HIGH_FREQ / binResolution; // High bin index
-const uint32_t sampling_period_us = round(1000000 / SAMPLING_FREQ); // Time between samples in microseconds
-double         vReal[SAMPLES];                   // Array for real parts of FFT input
-double         vImag[SAMPLES];                   // Array for imaginary parts (set to 0)
 
-// --- WiFi credentials ---
-const char*    ssid     = "";                    // WiFi SSID
-const char*    password = "";                    // WiFi password
+const uint8_t binResolution = SAMPLING_FREQ / SAMPLES;
+const uint16_t indexLow = LOW_FREQ / binResolution;
+const uint16_t indexHigh = HIGH_FREQ / binResolution;
+const uint32_t sampling_period_us = round(1000000 / SAMPLING_FREQ);
 
-// --- Spotify OAuth credentials ---
-char           clientId[]     = "";              // Your Spotify client ID
-char           clientSecret[] = "";              // Your Spotify client secret
-char           refreshToken[] = "";              // Your refresh token from the stopify token tool 
+double vReal[SAMPLES];
+double vImag[SAMPLES];
 
-String         accessToken;                      // Active OAuth token
-uint32_t       lastTokenRefresh = 0;             // Timestamp of last token refresh
-const uint32_t tokenRefreshInterval = 50UL * 60UL * 1000UL; // Refresh every 50 minutes
-uint8_t        detectionCounter = 0;             // Count of consecutive detections
-const uint8_t  detectionFramesRequired = 5;      // Threshold for confirming detection
-bool           noisePaused = false;              // Is playback currently paused due to noise?
-uint32_t       progress = 0;                     // Playback position for resume
+const char* ssid = "Eintracht";
+const char* password = "26122010Merz";
 
-WiFiClientSecure client;                         // HTTPS client
-ArduinoFFT<double> FFT = ArduinoFFT<double>();   // FFT instance
+const char clientId[] = "5a35545e79eb41e7ad56295b0ffd14a9";
+const char refreshTokenInitial[] = "AQC3xN_vN2XT03s98JHwAiU3-sxcecx3hqrT-MJ3IeXWu2Qiz6a3MVAFmGui84L2nx9RnAjqVuUGgjHbJLMHJ3_E_2TghoIpr4w27aGyvGcESVLkhPgAjhTSk9YwdVOz8Ys";
 
-TaskHandle_t audioTaskHandle = NULL;             // Handle for the audio analysis task
+String refreshTokenStored = "";
+String accessToken = "";
+
+uint32_t lastTokenRefresh =0;
+const uint32_t tokenRefreshInterval =50UL *60UL *1000UL;
+
+uint8_t detectionCounter =0;
+const uint8_t detectionFramesRequired =5;
+bool noisePaused = false;
+uint32_t progress =0;
+
+WiFiClientSecure client;
+ArduinoFFT<double> FFT = ArduinoFFT<double>();
+
+Preferences preferences;
+TaskHandle_t audioTaskHandle = NULL;
+
+bool refreshSpotifyAccessToken(bool retry = true);
 
 void setup() {
-  Serial.begin(115200);                          // Start serial monitor
-  delay(1000);                                   // Give time for USB connection
-  WiFi.begin(ssid, password);                    // Connect to WiFi
-  while (WiFi.status() != WL_CONNECTED) delay(500); // Wait until connected
-  Serial.println("📶 WiFi connected: " + WiFi.localIP().toString());
-  client.setInsecure();                          // Skip certificate validation
+ Serial.begin(115200);
+ delay(1000);
 
-  if (!refreshSpotifyAccessToken()) {            // Try to get initial access token
-    Serial.println("❌ Failed to get Access Token. Stopping.");
-    while(true);                                 // Halt execution if no token present
-  }
+ WiFi.begin(ssid, password);
+ while (WiFi.status() != WL_CONNECTED) delay(500);
+ Serial.println("📶 WLAN verbunden: " + WiFi.localIP().toString());
 
-  xTaskCreatePinnedToCore(audioTask, "AudioTask", 4096, NULL, 1, &audioTaskHandle, 0); // Run audio task on core 0
+ client.setInsecure();
+
+ preferences.begin("stopify", false);
+ refreshTokenStored = preferences.getString("refreshToken", "");
+ if (refreshTokenStored == "") {
+ refreshTokenStored = refreshTokenInitial;
+ preferences.putString("refreshToken", refreshTokenStored);
+ Serial.println("📦 Initial Refresh Token stored");
+ }
+
+ if (!refreshSpotifyAccessToken(true)) {
+ Serial.println("❌ Fehler beim initialen Token-Abruf, stoppe...");
+ while (true);
+ }
+
+ xTaskCreatePinnedToCore(audioTask, "AudioTask",4096, NULL,1, &audioTaskHandle,0);
+
 }
 
 void loop() {
@@ -102,68 +120,94 @@ void loop() {
   delay(100);                                    // Small delay to ease CPU
 }
 
-void audioTask(void *pvParameters) {             // Analyse audio
-  while(1) {                                     // Forever. It has an own Core 0
-    uint32_t startMicros = micros();             // Start sampling timestamp
-    for (uint16_t i = 0; i < SAMPLES; ++i) {     // Analyse every sample
-      vReal[i] = analogRead(ADC_PIN);            // Read analog sample
-      vImag[i] = 0;                              // Imaginary part is 0
-      while (micros() - startMicros < (i + 1) * sampling_period_us)
-        taskYIELD();                             // Wait until next sample
+void audioTask(void *pvParameters) {
+ while (1) {
+ uint32_t startMicros = micros();
+ for (uint16_t i =0; i < SAMPLES; i++) {
+ vReal[i] = analogRead(ADC_PIN);
+ vImag[i] =0;
+ while (micros() - startMicros < (i +1) * sampling_period_us)
+ taskYIELD();
+ }
+
+ FFT.windowing(vReal, SAMPLES, FFT_WIN_TYP_HANN, FFT_FORWARD);
+ FFT.compute(vReal, vImag, SAMPLES, FFT_FORWARD);
+ FFT.complexToMagnitude(vReal, vImag, SAMPLES);
+
+ double maxVal =0;
+ for (uint16_t i = indexLow; i <= indexHigh; i++) {
+ if (vReal[i] > maxVal) maxVal = vReal[i];
+ }
+
+ if (maxVal > THRESHOLD) detectionCounter++;
+ else detectionCounter =0;
+
+ delay(10);
+ }
+}
+
+void checkAndRefreshToken() {
+  unsigned long currentMillis = millis();
+  if (currentMillis - lastTokenRefresh >= tokenRefreshInterval) {
+    Serial.println("🔁 Access Token erneuern...");
+    if (refreshSpotifyAccessToken()) {
+      Serial.println("✅ Neuer Access Token erhalten");
+      lastTokenRefresh = currentMillis;
+    } 
+    else {
+      Serial.println("❌ Token-Erneuerung fehlgeschlagen");
     }
-
-    FFT.windowing(vReal, SAMPLES, FFT_WIN_TYP_HANN, FFT_FORWARD); // Apply window
-    FFT.compute(vReal, vImag, SAMPLES, FFT_FORWARD); // Perform FFT
-    FFT.complexToMagnitude(vReal, vImag, SAMPLES); // Get magnitudes
-
-    double maxVal = 0.0;                         // Reset amplitude
-    for (uint16_t i = indexLow; i <= indexHigh; i++) // Scan relevant band
-      if (vReal[i] > maxVal) maxVal = vReal[i];
-
-    if (maxVal > THRESHOLD) detectionCounter++;  // Noise detected
-    else detectionCounter = 0;                   // Reset counter
-
-    delay(10);                                   // Prevent CPU hog
   }
 }
 
-void checkAndRefreshToken() {                    // // Check periodically and refresh Spotify OAuth access token if needed
-  unsigned long currentMillis = millis();        // Get current time in milliseconds
-  if (currentMillis - lastTokenRefresh >= tokenRefreshInterval) { // Check if token refresh interval passed
-    Serial.println("🔁 Access Token erneuern..."); // Log token refresh start
-    accessToken = refreshSpotifyAccessToken();   // Attempt to refresh the Spotify access token
-    if (accessToken.length() > 0) {              // Check if a new token was successfully obtained
-      Serial.println("✅ Received new access token"); // Debug output
-      lastTokenRefresh = currentMillis;          // Update last refresh timestamp
-    } else {
-      Serial.println("❌ Could not refresh token."); // Debug output
-    }
-  }
-} 
+bool refreshSpotifyAccessToken(bool retry) {
+ if (!client.connect("accounts.spotify.com",443)) {
+ Serial.println("❌ Verbindung zu Spotify fehlgeschlagen");
+ return false;
+ }
 
-bool refreshSpotifyAccessToken() {               // Perform OAuth refresh token request to get a new access token
-  if (!client.connect("accounts.spotify.com", 443)) { // Connect to Spotify account via HTTPS
-    Serial.println("❌ Failed to connect to Spotify"); // Debug output
-    return false;                                // Fail if connection unsuccessful
-  }
-  String credentials = String(clientId) + ":" + String(clientSecret); // Prepare client credentials string
-  String encodedCredentials = base64::encode(credentials); // Base64 encode clientId:clientSecret
-  String postData = "grant_type=refresh_token&refresh_token=" + String(refreshToken); // Prepare POST data for token refresh
-  client.print(String("POST /api/token HTTP/1.1\r\n") + // Send POST request to token endpoint
-               "Host: accounts.spotify.com\r\n" + 
-               "Authorization: Basic " + encodedCredentials + "\r\n" + // Add Basic Auth header
-               "Content-Type: application/x-www-form-urlencoded\r\n" + // Content type header
-               "Content-Length: " + postData.length() + "\r\n\r\n" + // Content length header
-               postData);                        // POST body with grant_type and refresh_token
-  String response = client.readString();         // Read the response from server
-  client.stop();                                 // Close connection
-  int pos = response.indexOf("\"access_token\":\""); // Look for access_token in JSON response
-  if (pos >= 0) {
-    accessToken = response.substring(pos + 16, response.indexOf("\"", pos + 16)); // Extract access token string
-    return true;                                 // Return true is successfull
-  }
-  return false;                                  // Return false if token not found
-} 
+ String postData = "grant_type=refresh_token&refresh_token=" + refreshTokenStored +
+ "&client_id=" + String(clientId);
+
+ client.print(String("POST /api/token HTTP/1.1\r\n") +
+ "Host: accounts.spotify.com\r\n" +
+ "Content-Type: application/x-www-form-urlencoded\r\n" +
+ "Content-Length: " + postData.length() + "\r\n\r\n" +
+ postData);
+
+ String response = client.readString();
+ client.stop();
+
+ Serial.println("🔍 Antwort von Spotify: " + response);
+ if (response.indexOf("invalid_grant") != -1) {
+ Serial.println("⚠️ Refresh Token ungültig oder widerrufen");
+
+ if (retry) {
+ refreshTokenStored = refreshTokenInitial;
+ preferences.putString("refreshToken", refreshTokenStored);
+ Serial.println("🧠 Initialen Token neu gespeichert");
+ return refreshSpotifyAccessToken(false);
+ }
+
+ Serial.println("🛑 Kein gültiger Refresh Token verfügbar");
+ return false;
+ }
+
+ int pos = response.indexOf("\"access_token\":\"");
+ if (pos >=0) {
+ accessToken = response.substring(pos +16, response.indexOf("\"", pos +16));
+
+ int refreshTokenPos = response.indexOf("\"refresh_token\":\"");
+ if (refreshTokenPos >=0) {
+ refreshTokenStored = response.substring(refreshTokenPos +17, response.indexOf("\"", refreshTokenPos +17));
+ preferences.putString("refreshToken", refreshTokenStored);
+ }
+
+ return true;
+ }
+
+ return false;
+}
 
 void pauseSpotify() {                            // Pause playback
   if (!client.connect("api.spotify.com", 443)) return; // Connect to Spotify API
