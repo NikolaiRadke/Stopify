@@ -4,6 +4,9 @@
 You're home alone, just sat down with an audiobook – and then it starts. Noise. That was clear. Of course. **Stopify** pauses 
 the playback until the noise stops. Simple to build, simple to configure. Save your nerves and build Stopify today!
 
+# WARNING: STOPIFY IS NOT WORKING RIGHT NOW!
+Spotiy switched from OAuth2 to PKCE authenticifation process. I have to rework almost everything.
+
 *Oje, Englisch? Kann ich nicht. Schnell [hier hin](https://github.com/NikolaiRadke/Stopify/wiki)*.  
 
 ![Stopify](http://www.nikolairadke.de/stopify/stopify_3.jpg)
@@ -13,7 +16,7 @@ noise and pauses Spotify playback when specific sound patterns are detected – 
 or similar. Playback resumes automatically once the noise is gone.
 
 🆕 What's new?  
-* **25.05.2025** Updated the token tools due to new Spotify security guidelines. *Sigh*.  
+* **26.05.2025** Reworking auth process from OAuth2 to PKCE. *Sigh*.  
     -- More news? Check the [newsblog](https://github.com/NikolaiRadke/Stopify/tree/main/NEWS.md).
      
 ### Prerequisites
