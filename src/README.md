@@ -18,18 +18,17 @@ To get started, you’ll need to add ESP32 support to your Arduino IDE:
 ### Preparing the sketch
 You’ll need your Client ID, Client Secret, and the Refresh Token. There’s a tool available for Linux and Windows to help you get the token:  [token_tool](https://github.com/NikolaiRadke/Stopify/tree/main/token_tool). Now open the sketch file and make the following edits:  
 
-1. Line 40: enter your Wi-Fi **SSID** in ``` ssid = ""; ```.`
-2. Line 41: enter your Wi-Fi **password** in ``` password = ""; ```.
-3. Line 44: paste your **Client ID** into `` clientId[] = ""; ```. 
-4. Line 45: paste your **Client Secret** into ``` clientSecret[] = ""; ```.
+1. Line 41: enter your Wi-Fi **SSID** in ``` ssid = ""; ```.`
+2. Line 42: enter your Wi-Fi **password** in ``` password = ""; ```.
+3. Line 45: paste your **Client ID** into `` clientId[] = ""; ```. 
 4. Line 46: paste the **Refresh Token** into ``` refreshToken[] = ""; ```.
 
 ### Configuring the sketch
 You can customize Stopify’s behavior:
 
-* Line 27: ``` SAMPLING_FREQ ``` – change this if you want to detect higher frequencies. It must be at least **twice** the value of ``` HIGH_FREQ ``` (Nyquist theorem!).
-* Line 28: ``` THRESHOLD ``` – adjust this to change the sensitivity.
-* Line 29 & 30: ``` LOW_FREQ ``` and ``` HIGH_FREQ ``` – define the frequency band to monitor (e.g., 3000–4000 Hz for power tools).
+* Line 28: ``` SAMPLING_FREQ ``` – change this if you want to detect higher frequencies. It must be at least **twice** the value of ``` HIGH_FREQ ``` (Nyquist theorem!).
+* Line 29: ``` THRESHOLD ``` – adjust this to change the sensitivity.
+* Line 30 & 31: ``` LOW_FREQ ``` and ``` HIGH_FREQ ``` – define the frequency band to monitor (e.g., 3000–4000 Hz for power tools).
 
 ### Uploading the sketch
 1. Go to ``` Tools > Board > esp32 ``` **ESP32 Dev Module** or whatever kind of board you are using.
