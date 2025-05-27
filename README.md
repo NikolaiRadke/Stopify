@@ -19,6 +19,7 @@ or similar. Playback resumes automatically once the noise is gone.
 ### Prerequisites
   
 Besides some tools and a bit of time, you'll need:
+* Soptify **Premium** account
 * Arduino IDE 1.6.6 or newer
 * ESP32 core support, the base64 and the arduinoFFT libraries
 * (Optional) An audio analysis app like Spectroid (Android) or SpectrumView (IOS)
