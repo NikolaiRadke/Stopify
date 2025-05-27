@@ -59,28 +59,27 @@ ArduinoFFT<double> FFT = ArduinoFFT<double>();   // FFT instance
 Preferences preferences;                         // ESP32 EEPROM/flash memory
 TaskHandle_t audioTaskHandle = NULL;             // Handler for the audio analysis task
 
-bool refreshSpotifyAccessToken(bool retry = true);
+bool refreshSpotifyAccessToken(bool retry = true); // Forward declaration for token refresh function
 
 void setup() {
-Serial.begin(115200);                            // Start serial monitor
+Serial.begin(115200);                            // Start serial monitor for debugging
   delay(1000);                                   // Give time for USB connection
-  WiFi.begin(ssid, password);                    // Connect to WiFi
-  while (WiFi.status() != WL_CONNECTED) delay(500); // Wait until connected
-  Serial.println("📶 WiFi connected: " + WiFi.localIP().toString());
+  WiFi.begin(ssid, password);                    // Begin WiFi connection with credentials
+  while (WiFi.status() != WL_CONNECTED) delay(500); // Wait until connection is established
+  Serial.println("📶 WiFi connected: " + WiFi.localIP().toString()); // Print IP address
   client.setInsecure();                          // Skip certificate validation
-  preferences.begin("stopify", false);           // Open EEPROM
+  preferences.begin("stopify", false);           // Open preferences namespace "stopify"
   
-  refreshTokenStored = preferences.getString("refreshToken", "");
-  if (refreshTokenStored == "") {
-    refreshTokenStored = refreshTokenInitial;
-    preferences.putString("refreshToken", refreshTokenStored);
-    Serial.println("📦 Initial refresh token stored");
+  refreshTokenStored = preferences.getString("refreshToken", ""); // Load stored refresh token
+  if (refreshTokenStored == "") {                // If none is stored 
+    refreshTokenStored = refreshTokenInitial;    // Use initial token from code
+    preferences.putString("refreshToken", refreshTokenStored); // Save it
+    Serial.println("📦 Initial refresh token stored"); // Debug output
   }
   
   if (!refreshSpotifyAccessToken()) {            // Try to get initial access token
-    Serial.println("❌ Failed to get Access Token. Stopping.");
-    while(true);                                 // Halt execution if no token present
-  }
+    Serial.println("❌ Failed to get Access Token. Stopping."); // Debug output
+    while(true);                                 // Stop execution (hang)
 
   xTaskCreatePinnedToCore(audioTask, "AudioTask", 4096, NULL, 1, &audioTaskHandle, 0); // Run audio task on core 0
 }
@@ -88,14 +87,14 @@ Serial.begin(115200);                            // Start serial monitor
 
 void loop() {
   // Token handling
-  checkAndRefreshToken();                        // Refresh access token if needed
+  checkAndRefreshToken();                        // Periodically refresh Spotify token
 
-  // Pause
-  if (detectionCounter >= detectionFramesRequired) { // Noise detected?
+  // Pause detection
+  if (detectionCounter >= detectionFramesRequired) {  // Enough detections in a row?
     if (isSpotifyPlaying()) {                    // Only if Spotify is playing
       pauseSpotify();                            // Pause playback
       noisePaused = true;                        // Set pause flag
-      progress = getCurrentPlaybackPosition();   // Save playback position
+      progress = getCurrentPlaybackPosition();   // Save current position for resume
       Serial.println("🛑 Spotify paused due to noise"); // Debug output
     }
   } else {
@@ -114,9 +113,9 @@ void loop() {
   delay(100);                                    // Small delay to ease CPU
 }
 
-void audioTask(void *pvParameters) {             // Analyse audio
+void audioTask(void *pvParameters) {             // Task: continuously sample audio & analyse
   while(1) {                                     // Forever. It has an own Core 0
-    uint32_t startMicros = micros();             // Start sampling timestamp
+    uint32_t startMicros = micros();             // Timestamp of start
     for (uint16_t i = 0; i < SAMPLES; ++i) {     // Analyse every sample
       vReal[i] = analogRead(ADC_PIN);            // Read analog sample
       vImag[i] = 0;                              // Imaginary part is 0
@@ -132,14 +131,14 @@ void audioTask(void *pvParameters) {             // Analyse audio
     for (uint16_t i = indexLow; i <= indexHigh; i++) // Scan relevant band
       if (vReal[i] > maxVal) maxVal = vReal[i];
 
-    if (maxVal > THRESHOLD) detectionCounter++;  // Noise detected
-    else detectionCounter = 0;                   // Reset counter
+    if (maxVal > THRESHOLD) detectionCounter++;  // Noise threshold exceeded
+    else detectionCounter = 0;                   // Noise threshold exceeded
 
     delay(10);                                   // Prevent CPU hog
   }
 }
 
-void checkAndRefreshToken() {                    // Check periodically and refresh Spotify OAuth access token if needed
+void checkAndRefreshToken() {                    // Refresh token when time elapsed
   unsigned long currentMillis = millis();        // Get current time in milliseconds
   if (currentMillis - lastTokenRefresh >= tokenRefreshInterval) { // Check if token refresh interval passed
     Serial.println("🔁 Refresh access token..."); // Debug output
