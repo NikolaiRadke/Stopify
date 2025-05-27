@@ -13,7 +13,7 @@ noise and pauses Spotify playback when specific sound patterns are detected – 
 or similar. Playback resumes automatically once the noise is gone.
 
 🆕 What's new?  
-* **26.05.2025** Reworking auth process from OAuth2 to OAuth2 with PKCE. *Sigh*.  
+* **27.05.2025** First V1.0 release.  
     -- More news? Check the [newsblog](https://github.com/NikolaiRadke/Stopify/tree/main/NEWS.md).
      
 ### Prerequisites
