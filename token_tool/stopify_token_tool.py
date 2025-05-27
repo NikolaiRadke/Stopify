@@ -1,15 +1,18 @@
 # The token tool was written in Python — using ChatGPT — because the creator didn’t know any Python.   
 # It works anyway.  
 
+import os
+import sys
+import time
 import base64
 import hashlib
-import os
 import secrets
 import threading
 import urllib.parse
 import webbrowser
 from flask import Flask, request, redirect, render_template_string
 import requests
+
 
 app = Flask(__name__)
 code_verifier = ""
@@ -55,6 +58,11 @@ HTML_FORM = """
             border-radius: 5px;
             cursor: pointer;
         }
+        button.shutdown {
+            background-color: #ff4d4d;
+            color: white;
+            margin-top: 20px;
+        }
         .token-box {
             background: white;
             color: #1db954;
@@ -65,9 +73,7 @@ HTML_FORM = """
             font-size: 14px;
             word-break: break-all;
             margin-top: 30px;
-        }
-        h2 {
-            margin-top: 40px;
+            text-align: center;
         }
     </style>
 </head>
@@ -128,59 +134,118 @@ def callback():
         tokens = response.json()
         refresh = tokens.get("refresh_token")
         return f"""
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="utf-8">
-            <title>Stopify Tokens</title>
-            <style>
-                body {{
-                    background-color: #1db954;
-                    font-family: Arial, sans-serif;
-                    color: white;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    height: 100vh;
-                    margin: 0;
-                    padding: 20px;
-                }}
-                h2 {{
-                    color: white;
-                    margin-bottom: 10px;
-                }}
-                .token-box {{
-                    background: white;
-                    color: #1db954;
-                    padding: 20px;
-                    border-radius: 10px;
-                    width: 80%;
-                    max-width: 700px;
-                    font-size: 14px;
-                    word-break: break-all;
-                }}
-                p {{
-                    text-align: center;
-                    margin-top: 20px;
-                    font-size: 14px;
-                }}
-            </style>
-        </head>
-        <body>
-            <h2>✅ Refresh Token erhalten!</h2>
-            <div class="token-box">{refresh}</div>
-            <p><em>Kopiere den Token und füge ihn in deinen ESP32-Sketch ein.</em></p>
-        </body>
-        </html>
-        """
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Stopify Tokens</title>
+    <style>
+        body {{
+            background-color: #1db954;
+            font-family: Arial, sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }}
+        h2 {{
+            color: white;
+            margin-bottom: 10px;
+        }}
+        .token-box {{
+            background: white;
+            color: #1db954;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 700px;
+            font-size: 14px;
+            word-break: break-word;
+            margin-bottom: 20px;
+        }}
+        button {{
+            background-color: white;
+            color: #1db954;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }}
+        p {{
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }}
+    </style>
+</head>
+<body>
+    <h2>✅ Refresh Token erhalten!</h2>
+    <div class="token-box">{refresh}</div>
+    <p><em>Kopiere den Token und füge ihn in deinen ESP32-Sketch ein.</em></p>
+    <form action="/shutdown" method="post">
+        <button type="submit">🛑 Server beenden</button>
+    </form>
+</body>
+</html>
+"""
     else:
         return f"<h2>Fehler</h2><pre>{response.text}</pre>"
+
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        print("❌ Werkzeug Shutdown nicht verfügbar, benutze os._exit(0)")
+        # Hier starten wir den Exit in 1 Sekunde, keine Access auf request in Thread nötig
+        threading.Timer(1.0, lambda: os._exit(0)).start()
+    else:
+        # Shutdown in Thread, um sofort Antwort zurückzugeben
+        threading.Thread(target=func).start()
+
+    # Abschiedsseite sofort zurückgeben
+    return """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Auf Wiedersehen!</title>
+        <style>
+            body {
+                background-color: #1db954;
+                font-family: Arial, sans-serif;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                margin: 0;
+            }
+            h2 {
+                margin-bottom: 10px;
+            }
+            p {
+                font-size: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>👋 Server wurde beendet</h2>
+        <p>Du kannst das Fenster jetzt schließen.</p>
+    </body>
+    </html>
+    """
+
 
 def open_browser():
     webbrowser.open("http://127.0.0.1:8888")
 
 if __name__ == '__main__':
     threading.Timer(1, open_browser).start()
-    app.run(port=8888)
-
+    app.run(port=8888, debug=True, use_reloader=False)
