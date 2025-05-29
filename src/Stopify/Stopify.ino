@@ -1,5 +1,5 @@
 /*
-    Stopify V1.0 26.05.2025 - Nikolai Radke
+    Stopify V1.0 29.05.2025 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for audio analysis gadget. Pauses Spotify if noise detected.
@@ -167,28 +167,28 @@ bool refreshSpotifyAccessToken(bool retry) {     // Perform OAuth refresh token 
   String response = client.readString();         // Read the response from server
   client.stop();                                 // Close connection
  
-  if (response.indexOf("invalid_grant") != -1) {
-    Serial.println("⚠️ Refresh token invalid or revoked");
-    if (retry) {
-      refreshTokenStored = refreshTokenInitial;
+  if (response.indexOf("invalid_grant") != -1) { // Token invalid or revoked
+    Serial.println("⚠️ Refresh token invalid or revoked"); // Debug output
+    if (retry) {                                // If retry is allowed
+      refreshTokenStored = refreshTokenInitial; // Use initial token again
       preferences.putString("refreshToken", refreshTokenStored);
-      Serial.println("🧠 Initialen Token neu gespeichert");
-      return refreshSpotifyAccessToken(false);
+      Serial.println("🧠 Initialen Token neu gespeichert"); // Debug output
+      return refreshSpotifyAccessToken(false);   // Retry with initial token
     }
-    Serial.println("🛑 No valid refresh token available");
+    Serial.println("🛑 No valid refresh token available"); // Debug output
     return false;
   }
-  int pos = response.indexOf("\"access_token\":\"");
-  if (pos >=0) {
-    accessToken = response.substring(pos +16, response.indexOf("\"", pos +16));
+  int pos = response.indexOf("\"access_token\":\"");  // Look for "access token"
+  if (pos >=0) {                                 // Found?
+    accessToken = response.substring(pos +16, response.indexOf("\"", pos +16)); // // Get access token
     int refreshTokenPos = response.indexOf("\"refresh_token\":\"");
-    if (refreshTokenPos >=0) {
+    if (refreshTokenPos >=0) {                   //  // If new refresh token is included
       refreshTokenStored = response.substring(refreshTokenPos +17, response.indexOf("\"", refreshTokenPos +17));
-      preferences.putString("refreshToken", refreshTokenStored);
+      preferences.putString("refreshToken", refreshTokenStored); // // Save to flash memory
     }
-    return true;
+    return true;                                 // Success
   }
-  return false;
+  return false;                                  // // No valid response found
 }
 
 void pauseSpotify() {                            // Pause playback
