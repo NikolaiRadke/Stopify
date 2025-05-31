@@ -18,10 +18,10 @@ To get started, you’ll need to add ESP32 support to your Arduino IDE:
 ### Preparing the sketch
 You’ll need your Client ID and the Refresh Token. There’s a tool available for Linux and Windows to help you get the token:  [token_tool](https://github.com/NikolaiRadke/Stopify/tree/main/token_tool). Now open the sketch file and make the following edits:  
 
-1. Line 41: enter your Wi-Fi **SSID** in ``` ssid = ""; ```.`
-2. Line 42: enter your Wi-Fi **password** in ``` password = ""; ```.
-3. Line 45: paste your **Client ID** into `` clientId[] = ""; ```. 
-4. Line 46: paste the **Refresh Token** into ``` refreshToken[] = ""; ```.
+1. Line 43: enter your Wi-Fi **SSID** in ``` ssid = ""; ```.`
+2. Line 44: enter your Wi-Fi **password** in ``` password = ""; ```.
+3. Line 47: paste your **Client ID** into `` clientId[] = ""; ```. 
+4. Line 48: paste the **Refresh Token** into ``` refreshToken[] = ""; ```.
 
 ### Configuring the sketch
 You can customize Stopify’s behavior:
