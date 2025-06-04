@@ -20,6 +20,8 @@ If you feel unsafe to run an executable from an unkown author like me, see [secu
 13. If you are not logged to Spotify, log in now.  
 14. Click ``` Agree ```.  to authorize the app. Your **refresh token** is now displayed.  
 15. Copy the **Client ID** and **Refresh Token** into your Stopify sketch. That’s it — your ESP32 is now linked to Spotify.  
+
+The file was compiled with PyInstaller. the source code is in the folder [token_took](https://github.com/NikolaiRadke/Stopify/blob/main/token_tool). To run it in a python enviroment, you need to install **flask** and **requests**. 
       
 *Fun fact:*
 The token tool was written in Python — using ChatGPT — because the creator didn’t know any Python.   
