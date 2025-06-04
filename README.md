@@ -13,7 +13,7 @@ noise and pauses Spotify playback when specific sound patterns are detected – 
 or similar. Playback resumes automatically once the noise is gone.
 
 🆕 What's new?  
-* **27.05.2025** First V1.0 release.  
+* **04.06.2025** Added security informations for the tooken tool.  
     -- More news? Check the [newsblog](https://github.com/NikolaiRadke/Stopify/tree/main/NEWS.md).
      
 ### Prerequisites
