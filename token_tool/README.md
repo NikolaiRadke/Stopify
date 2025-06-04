@@ -2,6 +2,8 @@
 
 To work properly, Stopify needs access to your Spotify account. This is done by creating a **Spotify app** through the [https://developer.spotify.com/](https://developer.spotify.com/) portal. Don't worry, ou only need to do this **once*.
 
+If you feel unsafe to run an executable from an unkown author like me, see [security.txt](https://github.com/NikolaiRadke/Stopify/blob/main/token_tool/security.txt) for security informations.  
+  
 1. Open the URL above and log in (top right corner).
 2. Click on your profile name (again, top righ) and select ``` Dashboard ```.
 3. Click on ``` Create app ```.
