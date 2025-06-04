@@ -34,6 +34,8 @@ const uint8_t  binResolution = SAMPLING_FREQ / SAMPLES; // Hz per FFT bin
 const uint16_t indexLow  = LOW_FREQ / binResolution; // Low bin index
 const uint16_t indexHigh = HIGH_FREQ / binResolution; // High bin index
 const uint32_t sampling_period_us = round(1000000 / SAMPLING_FREQ); // Time between samples in microseconds
+const uint8_t  detectionFramesRequired = 5;      // Threshold for confirming detection
+
 double         vReal[SAMPLES];                   // Array for real parts of FFT input
 double         vImag[SAMPLES];                   // Array for imaginary parts (set to 0)
 
@@ -50,7 +52,6 @@ String accessToken = "";                         // Active OAuth token
 uint32_t       lastTokenRefresh = 0;             // Timestamp of last token refresh
 const uint32_t tokenRefreshInterval = 50UL * 60UL * 1000UL; // Refresh every 50 minutes
 uint8_t        detectionCounter = 0;             // Count of consecutive detections
-const uint8_t  detectionFramesRequired = 5;      // Threshold for confirming detection
 bool           noisePaused = false;              // Is playback currently paused due to noise?
 uint32_t       progress = 0;                     // Playback position for resume
 
@@ -62,7 +63,7 @@ TaskHandle_t audioTaskHandle = NULL;             // Handler for the audio analys
 bool refreshSpotifyAccessToken(bool retry = true); // Forward declaration for token refresh function
 
 void setup() {
-Serial.begin(115200);                            // Start serial monitor for debugging
+  Serial.begin(115200);                          // Start serial monitor for debugging
   delay(1000);                                   // Give time for USB connection
   WiFi.begin(ssid, password);                    // Begin WiFi connection with credentials
   while (WiFi.status() != WL_CONNECTED) delay(500); // Wait until connection is established

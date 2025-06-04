@@ -1,0 +1,47 @@
+
+===========================
+Stopify PKCE Tool - README
+===========================
+
+SICHERHEITSINFORMATION (Deutsch)
+--------------------------------
+Dieses Tool dient ausschließlich dazu, einen Spotify Refresh Token zu generieren.
+Es verwendet den offiziellen Spotify Login (OAuth PKCE Flow) und läuft vollständig lokal.
+
+Hinweis: Das Tool benötigt nur deine Spotify Client-ID.
+Der Login erfolgt direkt über die offizielle Spotify-Webseite – keine Passwörter werden im Tool eingegeben oder gespeichert.
+
+* Keine Installation notwendig
+* Keine Speicherung von Passwörtern oder Daten
+* Kommunikation nur mit https://accounts.spotify.com
+* Quellcode ist offen und überprüfbar
+
+Die Anwendung speichert keine Daten und kann durch einfaches Löschen entfernt werden.
+
+Für technische Details siehe:
+https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
+
+---
+
+SECURITY INFORMATION (English)
+------------------------------
+This tool is used to generate a Spotify Refresh Token using the official PKCE OAuth flow.
+It runs entirely on your local machine and communicates only with Spotify.
+
+Note: The tool only requires your Spotify Client ID.
+Login happens directly via Spotify’s official website – no passwords are entered or stored by the tool.
+
+* No installation required  
+* No passwords or data are stored  
+* Only connects to https://accounts.spotify.com  
+* Source code available for inspection
+
+The app does not store any data and can be removed by simply deleting the file.
+
+For technical details, see:
+https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
+
+---
+
+Erstellt mit Python, Flask & PyInstaller  
+Created with Python, Flask & PyInstaller
