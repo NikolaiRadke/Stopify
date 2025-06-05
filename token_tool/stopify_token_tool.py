@@ -1,7 +1,7 @@
 # The token tool was written in Python — using ChatGPT — because the creator didn’t know any Python.   
 # It works anyway. 
 #
-# Requires flask and requsts.  
+# Requires flask and requsts. See requirements.txt.  
 # See security.txt for security informations.
 
 import os
