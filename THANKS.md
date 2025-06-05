@@ -13,5 +13,9 @@ Used ressources:
 - **arduinoFFT library** - by Enrique Condes  
 - **ChatGPT** - [OpenAI](https://chatopenai.de/)
 - **Gimp 2.10.32** - [Gimp](https://www.gimp.org)
+- **Fritzing 0.9.6** - [Fritzing](https://fritzing.org)
+- **Python 3.10.12** - [Python](https://www.python.org)
+- **Python Flask 3.1.1** - [Flask](https://flask.palletsprojects.com/en/stable)
+- **Python Requests 2.32.2** - [Requests](https://pypi.org/project/requests)
 - **Spectroid** - [Playstore](https://play.google.com/store/apps/details?id=org.intoorbit.spectrum&hl=de)
  
