@@ -1,6 +1,6 @@
 # How to get Client ID and Refresh Token
 
-To work properly, Stopify needs access to your Spotify account. This is done by creating a **Spotify app** through the [https://developer.spotify.com/](https://developer.spotify.com/) portal. Don't worry, ou only need to do this **once*.
+To work properly, Stopify needs access to your Spotify account. This is done by creating a **Spotify app** through the [https://developer.spotify.com/](https://developer.spotify.com/) portal. Don't worry, ou only need to do this **once**.
 
 If you feel unsafe to run an executable from an unkown author like me, see [security.txt](https://github.com/NikolaiRadke/Stopify/blob/main/token_tool/security.txt) for security informations.  
   
