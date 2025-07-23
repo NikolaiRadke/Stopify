@@ -3,7 +3,9 @@
 These people helped me with Stopify:  
   
 - **Marcus Hansson** - testing the tool and idea finding support.  
+- **Daniel Schwabe** - article editing.  
 - **Elise Lindner** - taking noises for testing.
+- **Make Magazin** - publishing an article.  
 
 Used ressources:  
   
