@@ -9,7 +9,7 @@ These people helped me with Stopify:
 
 Used ressources:  
   
-- **Arduino IDE 2.3.4** - [Arduino](http://www.arduino.cc)
+- **Arduino IDE 2.3.6** - [Arduino](http://www.arduino.cc)
 - **esp32 core** - [GitHub](https://github.com/espressif/arduino-esp32)
 - **base64 library** - by Xander Electronics  
 - **arduinoFFT library** - by Enrique Condes  
