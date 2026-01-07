@@ -2,7 +2,7 @@
 
 ## 2025
   
-* **25.07.2025** Stopify has a big article in the German Make Magazin 4/2025. 
+* **23.07.2025** Stopify has a big article in the German Make Magazin 4/2025. 
 * **04.06.2025** Added security informations for the tooken tool.  
 * **27.05.2025** First V1.0 release.  
 * **26.05.2025** Reworking auth process from OAuth2 to OAuth2 with PKCE. *Sigh*.  
