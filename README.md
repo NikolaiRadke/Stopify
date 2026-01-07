@@ -13,7 +13,7 @@ noise and pauses Spotify playback when specific sound patterns are detected – 
 or similar. Playback resumes automatically once the noise is gone.
 
 🆕 What's new?  
-* **25.07.2025** Stopify has a big article in the German Make Magazin 4/2025.   
+* **23.07.2025** Stopify has a big article in the German Make Magazin 4/2025.   
     -- More news? Check the [newsblog](https://github.com/NikolaiRadke/Stopify/tree/main/NEWS.md).
      
 ### Prerequisites
