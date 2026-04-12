@@ -1,6 +1,9 @@
 # Newsblog
 
 ## 2025
+* **12.04.2026** Bugfix: Stopify now uses ESP32 hardware FPU.     
+
+## 2025
   
 * **23.07.2025** Stopify has a big article in the German Make Magazin 4/2025. 
 * **04.06.2025** Added security informations for the tooken tool.  
