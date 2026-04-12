@@ -13,7 +13,7 @@ noise and pauses Spotify playback when specific sound patterns are detected – 
 or similar. Playback resumes automatically once the noise is gone.
 
 🆕 What's new?  
-* **23.07.2025** Stopify has a big article in the German Make Magazin 4/2025.   
+* **12.04.2026** Bugfix: Stopify now uses ESP32 hardware FPU.     
     -- More news? Check the [newsblog](https://github.com/NikolaiRadke/Stopify/tree/main/NEWS.md).
      
 ### Prerequisites
