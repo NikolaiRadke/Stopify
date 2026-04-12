@@ -1,5 +1,5 @@
 /*
-    Stopify V1.0 29.05.2025 - Nikolai Radke
+    Stopify V1.1 12.04.202 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for audio analysis gadget. Pauses Spotify if noise detected.
@@ -36,8 +36,8 @@ const uint16_t indexHigh = HIGH_FREQ / binResolution; // High bin index
 const uint32_t sampling_period_us = round(1000000 / SAMPLING_FREQ); // Time between samples in microseconds
 const uint8_t  detectionFramesRequired = 5;      // Threshold for confirming detection
 
-double         vReal[SAMPLES];                   // Array for real parts of FFT input
-double         vImag[SAMPLES];                   // Array for imaginary parts (set to 0)
+float          vReal[SAMPLES];                   // Array for real parts of FFT input
+float          vImag[SAMPLES];                   // Array for imaginary parts (set to 0)
 
 // --- WiFi credentials ---                      
 const char* ssid = "";                           // Your WiFi SSID
@@ -56,11 +56,12 @@ bool           noisePaused = false;              // Is playback currently paused
 uint32_t       progress = 0;                     // Playback position for resume
 
 WiFiClientSecure client;                         // HTTPS client
-ArduinoFFT<double> FFT = ArduinoFFT<double>();   // FFT instance
+ArduinoFFT<float> FFT = ArduinoFFT<float>();   // FFT instance
 Preferences preferences;                         // ESP32 EEPROM/flash memory
 TaskHandle_t audioTaskHandle = NULL;             // Handler for the audio analysis task
 
 bool refreshSpotifyAccessToken(bool retry = true); // Forward declaration for token refresh function
+void audioTask(void *pvParameters);
 
 void setup() {
   Serial.begin(115200);                          // Start serial monitor for debugging
@@ -80,7 +81,8 @@ void setup() {
   
   if (!refreshSpotifyAccessToken()) {            // Try to get initial access token
     Serial.println("❌ Failed to get Access Token. Stopping."); // Debug output
-    while(true);                                 // Stop execution (hang)
+    while(true);  
+  }                               // Stop execution (hang)
 
   xTaskCreatePinnedToCore(audioTask, "AudioTask", 4096, NULL, 1, &audioTaskHandle, 0); // Run audio task on core 0
 }
@@ -128,7 +130,7 @@ void audioTask(void *pvParameters) {             // Task: continuously sample au
     FFT.compute(vReal, vImag, SAMPLES, FFT_FORWARD); // Perform FFT
     FFT.complexToMagnitude(vReal, vImag, SAMPLES); // Get magnitudes
 
-    double maxVal = 0.0;                         // Reset amplitude
+    float maxVal = 0.0f;                         // Reset amplitude
     for (uint16_t i = indexLow; i <= indexHigh; i++) // Scan relevant band
       if (vReal[i] > maxVal) maxVal = vReal[i];
 
